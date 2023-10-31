@@ -28,8 +28,8 @@
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
               
-              <li class="nav-item"> <a class="nav-link" href="">Roles</a></li>
-              <li class="nav-item"> <a class="nav-link" href="">User</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{route('admin.role')}}">Roles</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{route('admin.user')}}">User</a></li>
             </ul>
           </div>
         </li>

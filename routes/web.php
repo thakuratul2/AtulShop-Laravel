@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\DasboardController;
+use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,8 @@ Route::group(['prefix' => 'admin'], function(){
 Route::get('/dashboard',[DasboardController::class,'Dashboard'])->name('admin.dashboard');
 
 Route::get('/logout',[DasboardController::class,'logout'])->name('admin.logout');
+Route::get('/users',[UserManagementController::class,'UserManagement'])->name('admin.user');
+Route::get('/roles',[UserManagementController::class,'UserRole'])->name('admin.role');
 
     });
 });
