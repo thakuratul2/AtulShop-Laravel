@@ -7,7 +7,8 @@
               <div class="auth-form-light text-left p-5">
                 @include('admin.message')
                 <div class="brand-logo">
-                  <img src="{{asset('admin-assets/images/logo.svg')}}">
+                  <h3 class="font-weight-light text-center">Welcome To Atul Shop</h3>
+
                 </div>
                 <h4>Hello! let's get started</h4>
                 <h6 class="font-weight-light">Sign in to continue.</h6>
@@ -16,7 +17,7 @@
                   <div class="form-group">
                     <input type="email" name="email" id="email" value="{{old('email')}}" class="form-control form-control-lg @error('email')
                         is-invalid
-                    @enderror" id="InputEmail1" placeholder="Username">
+                    @enderror" id="InputEmail1" placeholder="Enter Email">
                     @error('email')
                     <p class="invlaid-feedback">
                      {{$message}}
@@ -44,10 +45,7 @@
                     </div>
                     <a href="#" class="auth-link text-black">Forgot password?</a>
                   </div>
-                  <div class="mb-2">
-                    <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                      <i class="mdi mdi-facebook me-2"></i>Connect using facebook </button>
-                  </div>
+                  
                   <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.html" class="text-primary">Create</a>
                   </div>
                 </form>
