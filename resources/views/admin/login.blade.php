@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Atul Shop - Login</title>
-   
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/css/vendor.bundle.base.css')}}">
-   
-    <link rel="stylesheet" href="{{asset('admin-assets/css/style.css')}}">
-    
-    <link rel="shortcut icon" href="{{asset('admin-assets/images/favicon.ico')}}" />
-  </head>
-  <body>
+@include('admin.inc.header')
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
           <div class="row flex-grow">
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
+                @include('admin.message')
                 <div class="brand-logo">
                   <img src="{{asset('admin-assets/images/logo.svg')}}">
                 </div>
@@ -28,9 +14,9 @@
                 <form class="pt-3" method="POST" action="{{route('admin.auth')}}">
                   @csrf
                   <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control form-control-lg @error('email')
+                    <input type="email" name="email" id="email" value="{{old('email')}}" class="form-control form-control-lg @error('email')
                         is-invalid
-                    @enderror" id="exampleInputEmail1" placeholder="Username">
+                    @enderror" id="InputEmail1" placeholder="Username">
                     @error('email')
                     <p class="invlaid-feedback">
                      {{$message}}
@@ -41,7 +27,7 @@
                   <div class="form-group">
                     <input type="password" name="password" id="password" class="form-control form-control-lg @error('password')
                         is-invalid
-                    @enderror" id="exampleInputPassword1" placeholder="Password">
+                    @enderror" id="InputPassword1" placeholder="Password">
                     @error('password')
                     <p class="invlaid-feedback">
                      {{$message}}
@@ -74,11 +60,4 @@
       
     </div>
     
-    <script src="{{asset('admin-assets/vendors/js/vendor.bundle.base.js')}}"></script>
-   
-    <script src="{{asset('admin-assets/js/off-canvas.js')}}"></script>
-    <script src="{{asset('admin-assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{asset('admin-assets/js/misc.js')}}"></script>
-   
-  </body>
-</html>
+    @include('admin.inc.footer')
