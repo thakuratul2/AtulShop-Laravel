@@ -15,4 +15,9 @@ class UserManagementController extends Controller
     public function UserRole(){
         return view('admin.user.role');
     }
+
+    public function RoleCreate(){
+
+        return view('admin.user.create_role');
+    }
 }

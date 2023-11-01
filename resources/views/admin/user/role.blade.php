@@ -4,9 +4,9 @@
     {{'Roles'}}
 @endsection
 @section('add-role')
-<button type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+<a href="{{route('role.create')}}"><button type="button" class="btn btn-gradient-primary btn-rounded btn-icon" href="{{route('role.create')}}">
   <i class="mdi mdi-plus"></i>
-</button>
+</button></a>
 @endsection
 @section('content')
     
@@ -18,6 +18,7 @@
           
           <th> Role </th>
           <th> Permission </th>
+          <th> Assign By </th>
           <th> Action </th>
         </tr>
       </thead>

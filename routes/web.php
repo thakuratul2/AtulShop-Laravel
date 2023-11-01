@@ -38,6 +38,8 @@ Route::get('/dashboard',[DasboardController::class,'Dashboard'])->name('admin.da
 Route::get('/logout',[DasboardController::class,'logout'])->name('admin.logout');
 Route::get('/users',[UserManagementController::class,'UserManagement'])->name('admin.user');
 Route::get('/roles',[UserManagementController::class,'UserRole'])->name('admin.role');
+Route::get('/roles/create',[UserManagementController::class,'RoleCreate'])->name('role.create');
+
 
     });
 });

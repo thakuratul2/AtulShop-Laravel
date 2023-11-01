@@ -74,7 +74,7 @@
           <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
               <li class="breadcrumb-item active" aria-current="page">
-                <span></span>@yield('add-role')
+                @yield('add-role')
               </li>
             </ul>
           </nav>
