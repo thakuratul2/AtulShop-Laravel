@@ -42,6 +42,7 @@ Route::get('/logout',[DasboardController::class,'logout'])->name('admin.logout')
 //categoires routes
 Route::get('/categories',[CategoryController::class,'CategoryView'])->name('admin.category');
 Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
+Route::post('/categories',[CategoryController::class,'store'])->name('admin.show');
 
 
     });

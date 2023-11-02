@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('admin-assets/images/favicon.ico')}}" />
+    <meta name="csrf-token" content="{{csrf_token()}}">
   </head>
   <body>
     <div class="container-scroller">

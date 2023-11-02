@@ -14,22 +14,22 @@
     <div class="card">
       <div class="card-body">
        
-        <form class="forms-sample" method="POST" action="">
+        <form class="forms-sample" method="POST" action="" name="categoryForm" id="categoryForm">
             @csrf
           <div class="form-group">
             <label for="categoryname">Name</label>
-            <input type="text" class="form-control" id="categoryname" placeholder="Enter Category Name">
+            <input type="text" class="form-control" name="categoryname" id="categoryname" placeholder="Enter Category Name">
           </div>
           <div class="form-group">
             <label for="categoryslug">Slug</label>
-            <input type="text" class="form-control" id="categoryslug" placeholder="Enter Slug Name">
+            <input type="text" class="form-control" id="categoryslug" name="categoryslug" placeholder="Enter Slug Name">
           </div>
           
           <div class="form-group">
             <label for="status">Status</label>
             <select class="form-control" id="selectStatus" name="selectStatus">
-              <option>Active</option>
-              <option>Inactive</option>
+              <option value="1">Active</option>
+              <option value="0">Draft</option>
             </select>
           </div>
           {{-- <div class="form-group">
@@ -51,4 +51,27 @@
     </div>
   </div>
 
+  @endsection
+  
+  @section('customJs')
+  <script>
+ $("#categoryForm").submit(function(event)){
+
+event.preventDefault();
+val element = $(this);
+
+$.ajax({
+  url : '{{route("admin.show")}}',
+  type: 'post',
+  data : element.serializeArray(),
+  dataType : 'json',
+  success : function(response){
+
+  }, error: function(jqXHR, exception){
+    console.log("Something Error");
+  }
+})
+});
+  </script>
+     
   @endsection
