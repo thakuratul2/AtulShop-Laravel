@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DasboardController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,10 @@ Route::get('/dashboard',[DasboardController::class,'Dashboard'])->name('admin.da
 
 Route::get('/logout',[DasboardController::class,'logout'])->name('admin.logout');
 
+
+//categoires routes
+Route::get('/categories',[CategoryController::class,'CategoryView'])->name('admin.category');
+Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
 
 
     });

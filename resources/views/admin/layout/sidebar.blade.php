@@ -7,7 +7,15 @@
             
             <div class="nav-profile-text d-flex flex-column">
               <span class="font-weight-bold mb-2">{{Auth::guard('admin')->user()->name}}</span>
-              <span class="text-secondary text-small">Project Manager</span>
+              <span class="text-secondary text-small">@if (Auth::guard('admin')->user()->role == 1)
+                  Super Admin
+              @elseif(Auth::guard('admin')->user()->role == 2)
+                  Staff
+                  @else
+User
+              @endif
+              
+            </span>
             </div>
             <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
           </a>
@@ -21,14 +29,14 @@
         
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Category</span>
+            <span class="menu-title">Category Management</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-nature-people menu-icon"></i>
           </a>
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
               
-              <li class="nav-item"> <a class="nav-link" href="">Categories</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{route('admin.category')}}">Categories</a></li>
               <li class="nav-item"> <a class="nav-link" href="">Sub Categories</a></li>
             </ul>
           </div>
