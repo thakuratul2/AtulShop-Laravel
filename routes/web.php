@@ -45,5 +45,18 @@ Route::get('/categories/create',[CategoryController::class,'create'])->name('cat
 Route::post('/categories',[CategoryController::class,'store'])->name('admin.show');
 
 
+//slug
+Route::get('/slug', function(Request $req){
+
+    $slug = '';
+    if(!empty($req->title)){
+        $slug = Str::slug($req->title);
+    }
+    return response()->json([
+        'status' => true,
+        'slug' => $slug
+    ]);
+})->name('getSlug');
+
     });
 });

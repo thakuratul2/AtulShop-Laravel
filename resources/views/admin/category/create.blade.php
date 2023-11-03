@@ -18,18 +18,18 @@
             @csrf
           <div class="form-group">
             <label for="categoryname">Name</label>
-            <input type="text" class="form-control" name="categoryname" id="categoryname" placeholder="Enter Category Name">
+            <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name">
           <p></p>
           </div>
           <div class="form-group">
             <label for="categoryslug">Slug</label>
-            <input type="text" class="form-control" id="categoryslug" name="categoryslug" placeholder="Enter Slug Name">
+            <input type="text" class="form-control" readonly id="slug" name="slug" placeholder="Enter Slug Name">
           <p></p>
           </div>
           
           <div class="form-group">
             <label for="status">Status</label>
-            <select class="form-control" id="selectStatus" name="selectStatus">
+            <select class="form-control" id="status" name="status">
               <option value="1">Active</option>
               <option value="0">Draft</option>
             </select>
@@ -71,30 +71,30 @@
 
       if(response["status"] == true){
 
-        $("#categoryname").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");
 
-        $("#categoryslug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        $("#slug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");
       }else{
         var errors = response['errors'];
       if(errors['name']){
-        $("#categoryname").addClass('is-invalid')
+        $("#name").addClass('is-invalid')
         .siblings('p')
         .addClass('invalid-feedback')
         .html(errors['name']);
       }else{
         
-        $("#categoryname").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");
     
       }
 
       if(errors['slug']){
-        $("#categoryslug").addClass('is-invalid').siblings('p').addClass('invalid-feedback')
+        $("#slug").addClass('is-invalid').siblings('p').addClass('invalid-feedback')
         .html(errors['slug']);
       }else{
-        $("#categoryslug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        $("#slug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");
       }
       }
@@ -104,6 +104,23 @@
       console.log("Error");
     }
   })
+ });
+
+ $("#name").change(function(){
+  element = $(this);
+  $.ajax({
+
+url : '{{route("getSlug")}}',
+type: 'get',
+data : {title: element.val()},
+dataType: 'json',
+success : function(response){
+
+  if(response["status"] == true){
+    $("#slug").val(response["slug"]);
+  }
+}
+ });
  });
   </script>
      
