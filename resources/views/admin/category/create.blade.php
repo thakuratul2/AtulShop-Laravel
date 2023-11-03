@@ -17,12 +17,12 @@
         <form class="forms-sample" method="post" action="" name="categoryForm" id="categoryForm">
             @csrf
           <div class="form-group">
-            <label for="categoryname">Name</label>
+            <label for="name">Name</label>
             <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name">
           <p></p>
           </div>
           <div class="form-group">
-            <label for="categoryslug">Slug</label>
+            <label for="slug">Slug</label>
             <input type="text" class="form-control" readonly id="slug" name="slug" placeholder="Enter Slug Name">
           <p></p>
           </div>
@@ -106,22 +106,25 @@
   })
  });
 
- $("#name").change(function(){
-  element = $(this);
-  $.ajax({
+     
+     $("#name").change(function(){
+      element2 = $(this);
 
-url : '{{route("getSlug")}}',
-type: 'get',
-data : {title: element.val()},
-dataType: 'json',
-success : function(response){
+      $.ajax({
 
-  if(response["status"] == true){
-    $("#slug").val(response["slug"]);
-  }
-}
- });
- });
+        url: '{{ route("getSlug") }}',
+        type: 'get',
+        data: {title: element2.val()},
+        dataType: 'json',
+        success: function(response){
+
+          if(response["status"] == true){
+            $("#slug").val(response["slug"]);
+            
+          }
+        }
+      });
+     });
   </script>
      
   @endsection

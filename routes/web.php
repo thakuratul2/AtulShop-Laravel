@@ -46,7 +46,7 @@ Route::post('/categories',[CategoryController::class,'store'])->name('admin.show
 
 
 //slug
-Route::get('/slug', function(Request $req){
+Route::get('/GetSlug', function(Request $req){
 
     $slug = '';
     if(!empty($req->title)){
