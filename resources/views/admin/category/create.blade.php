@@ -14,15 +14,17 @@
     <div class="card">
       <div class="card-body">
        
-        <form class="forms-sample" method="POST" action="" name="categoryForm" id="categoryForm">
+        <form class="forms-sample" method="post" action="" name="categoryForm" id="categoryForm">
             @csrf
           <div class="form-group">
             <label for="categoryname">Name</label>
             <input type="text" class="form-control" name="categoryname" id="categoryname" placeholder="Enter Category Name">
+          <p></p>
           </div>
           <div class="form-group">
             <label for="categoryslug">Slug</label>
             <input type="text" class="form-control" id="categoryslug" name="categoryslug" placeholder="Enter Slug Name">
+          <p></p>
           </div>
           
           <div class="form-group">
@@ -55,23 +57,54 @@
   
   @section('customJs')
   <script>
- $("#categoryForm").submit(function(event)){
+ $("#categoryForm").submit(function(event){
+  event.preventDefault();
+  var element = $(this);
 
-event.preventDefault();
-val element = $(this);
+  $.ajax({
 
-$.ajax({
-  url : '{{route("admin.show")}}',
-  type: 'post',
-  data : element.serializeArray(),
-  dataType : 'json',
-  success : function(response){
+    url : '{{route("admin.show")}}',
+    type: 'post',
+    data : element.serializeArray(),
+    dataType: 'json',
+    success : function(response){
 
-  }, error: function(jqXHR, exception){
-    console.log("Something Error");
-  }
-})
-});
+      if(response["status"] == true){
+
+        $("#categoryname").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+
+        $("#categoryslug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+      }else{
+        var errors = response['errors'];
+      if(errors['name']){
+        $("#categoryname").addClass('is-invalid')
+        .siblings('p')
+        .addClass('invalid-feedback')
+        .html(errors['name']);
+      }else{
+        
+        $("#categoryname").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+    
+      }
+
+      if(errors['slug']){
+        $("#categoryslug").addClass('is-invalid').siblings('p').addClass('invalid-feedback')
+        .html(errors['slug']);
+      }else{
+        $("#categoryslug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+      }
+      }
+      
+    },
+    error: function(jqXHR, exception){
+      console.log("Error");
+    }
+  })
+ });
   </script>
      
   @endsection
