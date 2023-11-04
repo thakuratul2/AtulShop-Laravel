@@ -46,8 +46,7 @@
           </div> --}}
          
           
-          <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-          <button class="btn btn-light">Cancel</button>
+          <button type="submit" class="btn btn-gradient-primary me-2">Create</button>
         </form>
       </div>
     </div>
@@ -60,6 +59,7 @@
  $("#categoryForm").submit(function(event){
   event.preventDefault();
   var element = $(this);
+  $("button[type=submit]").prop('disabled', true);
 
   $.ajax({
 
@@ -69,7 +69,9 @@
     dataType: 'json',
     success : function(response){
 
+      $("button[type=submit]").prop('disabled', false);
       if(response["status"] == true){
+        window.location.href="{{route('admin.category')}}"
 
         $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");

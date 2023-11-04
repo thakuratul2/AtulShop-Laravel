@@ -10,11 +10,17 @@ use Validator;
 class CategoryController extends Controller
 {
     //
-    public function CategoryView(){
+    public function CategoryView(Request $req){
 
-        $cat = Category::latest()->paginate(10);
+        $cat = Category::orderBy('created_at','ASC');
+
+        if(!empty($req->get('keyword'))){
+            $cat = $cat->where('name', 'like', '%' .$req->get('keyword') . '%');
+        }
+        $cat = $cat->paginate(10);
         
-        return view('admin.category.list');
+        $data['cat'] = $cat;
+        return view('admin.category.list',$data);
     }
 
     public function create(){
