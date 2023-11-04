@@ -21,11 +21,11 @@
             <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name">
           <p></p>
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="slug">Slug</label>
             <input type="text" class="form-control" readonly id="slug" name="slug" placeholder="Enter Slug Name">
           <p></p>
-          </div>
+          </div> --}}
           
           <div class="form-group">
             <label for="status">Status</label>
@@ -74,8 +74,7 @@
         $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");
 
-        $("#slug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
-        .html("");
+       
       }else{
         var errors = response['errors'];
       if(errors['name']){
@@ -90,13 +89,7 @@
     
       }
 
-      if(errors['slug']){
-        $("#slug").addClass('is-invalid').siblings('p').addClass('invalid-feedback')
-        .html(errors['slug']);
-      }else{
-        $("#slug").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
-        .html("");
-      }
+     
       }
       
     },
@@ -107,24 +100,7 @@
  });
 
      
-     $("#name").change(function(){
-      element2 = $(this);
 
-      $.ajax({
-
-        url: '{{ route("getSlug") }}',
-        type: 'get',
-        data: {title: element2.val()},
-        dataType: 'json',
-        success: function(response){
-
-          if(response["status"] == true){
-            $("#slug").val(response["slug"]);
-            
-          }
-        }
-      });
-     });
   </script>
      
   @endsection

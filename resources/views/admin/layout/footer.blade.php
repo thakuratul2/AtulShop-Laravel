@@ -10,6 +10,11 @@
 
 <script src="{{asset('admin-assets/js/dashboard.js')}}"></script>
 <script src="{{asset('admin-assets/js/todolist.js')}}"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
+		<!-- Bootstrap 4 -->
+		<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="js/adminlte.min.js"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

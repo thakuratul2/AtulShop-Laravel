@@ -46,17 +46,17 @@ Route::post('/categories',[CategoryController::class,'store'])->name('admin.show
 
 
 //slug
-Route::get('/GetSlug', function(Request $req){
+// Route::get('/GetSlug', function(Request $request){
 
-    $slug = '';
-    if(!empty($req->title)){
-        $slug = Str::slug($req->title);
-    }
-    return response()->json([
-        'status' => true,
-        'slug' => $slug
-    ]);
-})->name('getSlug');
+//     $slug = '';
+//     if(!empty($request->title)){
+//         $slug = Str::slug($request->title);
+//     }
+//     return response()->json([
+//         'status' => true,
+//         'slug' => $slug
+//     ]);
+// })->name('getSlug');
 
     });
 });
