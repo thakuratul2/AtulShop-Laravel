@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DasboardController;
+use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,8 @@ Route::get('/logout',[DasboardController::class,'logout'])->name('admin.logout')
 Route::get('/categories',[CategoryController::class,'CategoryView'])->name('admin.category');
 Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
 Route::post('/categories',[CategoryController::class,'store'])->name('admin.show');
+
+Route::post('/category-images',[ImagesController::class,'store'])->name('temp-images.create');
 
 
 //slug

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\TempImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Validator;
 
 class CategoryController extends Controller
@@ -43,6 +45,23 @@ class CategoryController extends Controller
             $category->status = $request->status;
 
             $category->save();
+
+            //save images here
+            if(!empty($request->image)){
+                $tempImage = TempImages::find($request->image_id);
+                $extArray = explode('.',$tempImage->image_name);
+
+                $ext = last($extArray);
+
+                $newImage = $category->cid.'.'.$ext;
+                $spath = public_path().'/upload'.$tempImage->image_name;
+                $dpath = public_path().'/upload/category/'.$newImage;
+
+                File::copy($spath,$dpath);
+
+                $category->category_image = $newImage;
+                $category->save();
+            }
 
             $request->session()->flash('success','Category added successfully');
 
