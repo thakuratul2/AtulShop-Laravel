@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Validator;
 
+
+
 class CategoryController extends Controller
 {
     //
@@ -45,23 +47,28 @@ class CategoryController extends Controller
             $category->status = $request->status;
 
             $category->save();
+            //Intervention is used to create auto thumbnail
 
             //save images here
-            if(!empty($request->image)){
-                $tempImage = TempImages::find($request->image_id);
-                $extArray = explode('.',$tempImage->image_name);
+            if(!empty($request->image_id)){
+              $tempImage = TempImages::find($request->image_id);
+              $extArray = explode('.',$tempImage->image_name);
+              $ext = last($extArray);
 
-                $ext = last($extArray);
+              $newImageName = $category->cid.'.'.$ext;
+              $spath = public_path().'/upload/'.$tempImage->image_name;
+              $dpath = public_path().'/upload/category/'. $newImageName;
+               File::copy($spath,$dpath);
 
-                $newImage = $category->cid.'.'.$ext;
-                $spath = public_path().'/upload'.$tempImage->image_name;
-                $dpath = public_path().'/upload/category/'.$newImage;
 
-                File::copy($spath,$dpath);
+            
 
-                $category->category_image = $newImage;
-                $category->save();
+               $category->category_image = $newImageName;
+
+               $category->save();
+
             }
+  
 
             $request->session()->flash('success','Category added successfully');
 

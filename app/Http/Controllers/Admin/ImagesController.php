@@ -27,8 +27,8 @@ class ImagesController extends Controller
 
             return response()->json([
                 'status'=> true,
-                'image_id' => $tempImage->I_id,
-                'message' => 'Category is added'
+                'image_id' => $tempImage->tid,
+                'message' => 'Category Image is added'
             ]);
         }
     }

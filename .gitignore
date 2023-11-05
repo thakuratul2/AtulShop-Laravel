@@ -5,6 +5,7 @@
 /public/storage
 /public/upload
 /public/upload/category
+/public/upload/category/thumb
 /storage/*.key
 /vendor
 .env
