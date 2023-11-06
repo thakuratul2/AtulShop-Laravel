@@ -88,8 +88,14 @@ class CategoryController extends Controller
     
     
 
-    public function edit($cid){
+    public function edit($cid, Request $req){
 
+        $cat = Category::find($cid);
+        if(empty($cat)){
+            return redirect()->route('admin.category');
+        }
+        $data['cat'] = $cat;
+        return view('admin.category.edit',$data);
     }
 
     public function update(Request $request, $cid){
