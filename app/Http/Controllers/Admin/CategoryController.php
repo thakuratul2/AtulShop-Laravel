@@ -100,7 +100,71 @@ class CategoryController extends Controller
 
     public function update(Request $request, $cid){
 
+        $cat = Category::find($cid);
+        if(empty($cat)){
+            return response()->json([
+                'status' => false,
+                'notFound' => true,
+                'message' => 'Category not found'
+            ]);
+        }
+        $validator = Validator::make($request->all(), [
+            'name'=> 'required',
+    
+        ]);
 
+        if($validator->passes()){
+
+            $category = new Category();
+            $category->name = $request->name;
+           // $category->slug = $request->slug;
+            $category->status = $request->status;
+
+            $category->save();
+
+            //remove image
+            $oldImage = $category->category_image;
+            //Intervention is used to create auto thumbnail
+
+            //save images here
+            if(!empty($request->image_id)){
+              $tempImage = TempImages::find($request->image_id);
+              $extArray = explode('.',$tempImage->image_name);
+              $ext = last($extArray);
+
+              $newImageName = $category->cid.'-'.time().'.'.$ext;
+              $spath = public_path().'/upload/'.$tempImage->image_name;
+              $dpath = public_path().'/upload/category/'. $newImageName;
+               File::copy($spath,$dpath);
+
+
+            
+
+               $category->category_image = $newImageName;
+
+               $category->save();
+
+               //delete old image
+               File::delete(public_path().'/upload/category/'. $oldImage);
+               File::delete(public_path().'/upload/'. $oldImage);
+
+
+            }
+  
+
+            $request->session()->flash('success','Category updated successfully');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Updated'
+            ]);
+        }else{
+
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
     }
 
     public function destroy($id){

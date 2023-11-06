@@ -80,8 +80,8 @@
 
   $.ajax({
 
-    url : '{{route("admin.show")}}',
-    type: 'post',
+    url : '{{route("categories.update",$cat->cid)}}',
+    type: 'put',
     data : element.serializeArray(),
     dataType: 'json',
     success : function(response){

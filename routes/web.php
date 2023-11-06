@@ -45,6 +45,7 @@ Route::get('/categories',[CategoryController::class,'CategoryView'])->name('admi
 Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
 Route::post('/categories',[CategoryController::class,'store'])->name('admin.show');
 Route::get('/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.edit');
+Route::put('/categories/{category}',[CategoryController::class,'update'])->name('categories.update');
 
 Route::post('/category-images',[ImagesController::class,'store'])->name('temp-images.create');
 
