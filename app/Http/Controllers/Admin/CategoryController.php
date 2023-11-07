@@ -167,7 +167,26 @@ class CategoryController extends Controller
         }
     }
 
-    public function destroy($id){
+    public function destroy($cid, Request $req){
 
+        $cat = Category::find($cid);
+
+        if(empty($cat)){
+            return redirect()->josn('admin.category');
+        }
+
+        File::delete(public_path().'/upload/category/'. $cat->category_image);
+        File::delete(public_path().'/upload/'. $cat->category_image);
+
+        $cat->delete();
+        $req->session()->flash('success','Category Deleted');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Category deleted successfully'
+        ]);
     }
+
+
+
 }
