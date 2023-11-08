@@ -127,6 +127,7 @@ url : newUrl,
 type: 'delete',
 data : {},
 dataType: 'json',
+
 headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
