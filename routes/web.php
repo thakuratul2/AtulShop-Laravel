@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DasboardController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,14 @@ Route::post('/categories',[CategoryController::class,'store'])->name('admin.show
 Route::get('/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.edit');
 Route::put('/categories/{category}',[CategoryController::class,'update'])->name('categories.update');
 Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.delete');
+
+
+Route::get('/sub-categories',[SubCategoryController::class,'SubCategory'])->name('subcat.view');
+Route::get('/sub-categories/create',[SubCategoryController::class,'create'])->name('categories.create');
+Route::post('/sub-categories',[SubCategoryController::class,'store'])->name('admin.show');
+Route::get('/sub-categories/{sub-category}/edit',[SubCategoryController::class,'edit'])->name('categories.edit');
+Route::put('/sub-categories/{sub-category}',[SubCategoryController::class,'update'])->name('categories.update');
+Route::delete('/sub-categories/{sub-category}',[SubCategoryController::class,'destroy'])->name('categories.delete');
 
 
 Route::post('/category-images',[ImagesController::class,'store'])->name('temp-images.create');

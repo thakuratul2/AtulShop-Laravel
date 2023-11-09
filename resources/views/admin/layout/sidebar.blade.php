@@ -37,7 +37,7 @@ User
             <ul class="nav flex-column sub-menu">
               
               <li class="nav-item"> <a class="nav-link" href="{{route('admin.category')}}">Categories</a></li>
-              <li class="nav-item"> <a class="nav-link" href="">Sub Categories</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{route('subcat.view')}}">Sub Categories</a></li>
             </ul>
           </div>
         </li>
