@@ -5,7 +5,7 @@
 @endsection
 
 @section('add-role')
-<a href="{{route('categories.create')}}"><button type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+<a href="{{route('subcat.create')}}"><button type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
     <i class="mdi mdi-plus"></i>
   </button></a>
 @endsection
@@ -92,35 +92,5 @@
   @endsection
 
   @section('customJs')
-  <script>
-    function deleteCategory(cid){
-
-      var url = '{{ route("categories.delete", "cid") }}';
-      var newUrl = url.replace("cid", cid);
-      
-
-      if(confirm("Are your sure you want to delete")){
-        $.ajax({
-
-url : newUrl,
-type: 'delete',
-data : {},
-dataType: 'json',
-
-headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-},
-success : function(response){
-
-$("button[type=submit]").prop('disabled', false);
-if(response["status"]){
-window.location.href="{{route('admin.category')}}"
-    }
-
-  }
-});
-      }
-      
-}
-  </script>
+  
 @endsection

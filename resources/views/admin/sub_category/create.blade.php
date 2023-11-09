@@ -1,80 +1,83 @@
 @extends('admin.layout.app')
 
 @section('title')
-    {{'Add Category'}}
+    {{'Add Sub-Category'}}
 @endsection
 
 @section('add-role')
-    <a href="{{route('admin.category')}}"><button type="button" class="btn btn-gradient-primary btn-sm">Back</button></a>
+    <a href="{{route('subcat.view')}}"><button type="button" class="btn btn-gradient-primary btn-sm">Back</button></a>
 @endsection
 @section('content')
-    
-
-<div class="col-12 grid-margin stretch-card">
+<section class="content">
+  <!-- Default box -->
+  <div class="container-fluid">
+    <form action="" name="subCategory" id="subCategory">
     <div class="card">
-      <div class="card-body">
-       
-        <form class="forms-sample" method="post" action="" name="categoryForm" id="categoryForm">
-            @csrf
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name">
-          <p></p>
-          </div>
-          {{-- <div class="form-group">
-            <label for="slug">Slug</label>
-            <input type="text" class="form-control" readonly id="slug" name="slug" placeholder="Enter Slug Name">
-          <p></p>
-          </div> --}}
-          
-          <div class="form-group">
-            <label for="status">Status</label>
-            <select class="form-control" id="status" name="status">
-              <option value="1">Active</option>
-              <option value="0">Draft</option>
-            </select>
+      <div class="card-body">								
+        <div class="row">
+                            <div class="col-md-12">
+            <div class="mb-3">
+              <label for="name">Category</label>
+              <select name="category" id="category" class="form-control">
+                <option value="">Select a Category</option>
+                <p></p>
+                @if ($categories->isNotEmpty()) 
+                    @foreach ($categories as $item)
+                    <option value="{{$item->cid}}">{{$item->name}}</option>
+
+                    @endforeach
+                @endif
+                                    </select>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="mb-3">
-              <input type="hidden" id="image_id" name="image_id" value="">
-              <label class="image">Category Image</label>
-              <div id="image" class="dropzone dz-clickable">
-                <div class="dz-message needsclick">    
-                    <br>Drop files here or click to upload.<br><br>                                            
-                </div>
-            </div>
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Name">	
+            <p></p>
             </div>
           </div>
-          {{-- <div class="form-group">
-            <label>File upload</label>
-            <input type="file" name="img[]" class="file-upload-default">
-            <div class="input-group col-xs-12">
-              <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
-              <span class="input-group-append">
-                <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
-              </span>
+          {{-- <div class="col-md-6">
+            <div class="mb-3">
+              <label for="email">Slug</label>
+              <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">	
             </div>
-          </div> --}}
-         
-          
-          <button type="submit" class="btn btn-gradient-primary me-2">Create</button>
-        </form>
-      </div>
+          </div>									 --}}
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="status">Status</label>
+              <select class="form-control" id="status" name="status">
+                <option value="1">Active</option>
+                <option value="0">Draft</option>
+              </select>
+            </div>
+            
+          </div>
+        </div>
+      </div>							
     </div>
+    <div class="pb-5 pt-3">
+      <button class="btn btn-primary">Create</button>
+      <a href="subcategory.html" class="btn btn-outline-dark ml-3">Cancel</a>
+    </div>
+    </form>
   </div>
+  <!-- /.card -->
+</section>
+@endsection
 
-  @endsection
+
   
   @section('customJs')
   <script>
- $("#categoryForm").submit(function(event){
+    $("#subCategory").submit(function(event){
   event.preventDefault();
   var element = $(this);
   $("button[type=submit]").prop('disabled', true);
 
   $.ajax({
 
-    url : '{{route("admin.show")}}',
+    url : '{{route("subcat.show")}}',
     type: 'post',
     data : element.serializeArray(),
     dataType: 'json',
@@ -101,6 +104,17 @@
         .html("");
     
       }
+      if(errors['category']){
+        $("#category").addClass('is-invalid')
+        .siblings('p')
+        .addClass('invalid-feedback')
+        .html(errors['category']);
+      }else{
+        
+        $("#category").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+    
+      }
 
      
       }
@@ -111,31 +125,6 @@
     }
   })
  });
-
- Dropzone.autoDiscover = false;    
-const dropzone = $("#image").dropzone({ 
-    init: function() {
-        this.on('addedfile', function(file) {
-            if (this.files.length > 1) {
-                this.removeFile(this.files[0]);
-            }
-        });
-    },
-    url:  "{{ route('temp-images.create') }}",
-    maxFiles: 1,
-    paramName: 'image',
-    addRemoveLinks: true,
-    acceptedFiles: "image/jpeg,image/png,image/gif",
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }, success: function(file, response){
-        $("#image_id").val(response.image_id);
-        //console.log(response)
-    }
-});
-
-     
-
   </script>
      
   @endsection
