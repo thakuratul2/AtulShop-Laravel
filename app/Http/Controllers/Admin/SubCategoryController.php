@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -32,6 +33,20 @@ class SubCategoryController extends Controller
 
         if($validator->passes()){
 
+            $category = new SubCategory();
+            $category->name = $req->name;
+           // $category->slug = $request->slug;
+            $category->status = $req->status;
+            $category->category_id = $req->category;
+
+            $category->save();
+
+            $req->session()->flash('success','Sub Category added successfully');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Added'
+            ]);
         }else{
             return response([
                 'status'=> false,
