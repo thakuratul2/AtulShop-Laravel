@@ -36,6 +36,7 @@ class SubCategoryController extends Controller
             $category = new SubCategory();
             $category->name = $req->name;
            // $category->slug = $request->slug;
+           
             $category->status = $req->status;
             $category->category_id = $req->category;
 
