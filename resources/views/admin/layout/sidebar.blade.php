@@ -36,16 +36,16 @@ User
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
               
-              <li class="nav-item"> <a class="nav-link" href="{{route('admin.category')}}">Categories</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{route('subcat.view')}}">Sub Categories</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{route('admin.category')}}">Categories</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{route('subcat.view')}}">Sub Categories</a></li>
             </ul>
           </div>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
-            <span class="menu-title">Icons</span>
-            <i class="mdi mdi-contacts menu-icon"></i>
+          <a class="nav-link" href="{{route('brands.view')}}">
+            <span class="menu-title">Brands Management</span>
+            <i class="mdi mdi-assistant menu-icon"></i>
           </a>
         </li>
         <li class="nav-item">
