@@ -91,6 +91,10 @@
 
        
       }else{
+        if(response['notFound'] == true){
+          window.location.href="{{route('subcat.view')}}"
+          return false;
+        }
         var errors = response['errors'];
       if(errors['name']){
         $("#name").addClass('is-invalid')
