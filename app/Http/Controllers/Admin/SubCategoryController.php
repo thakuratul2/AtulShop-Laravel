@@ -65,5 +65,61 @@ class SubCategoryController extends Controller
             ]);
         }
     }
+    public function edit($sub_id, Request $req){
+
+        $sub = SubCategory::find($sub_id);
+        if(empty($sub)){
+            $req->session()->flash('error','Record not found');
+            return redirect()->route('subcat.view');
+        }
+
+        $subcat = Category::orderBy('name','ASC')->get();
+        
+        $data['categories'] = $subcat;
+        $data['sub'] = $sub;
+        return view('admin.sub_category.edit',$data);
+    }
+
+    public function update($sub_id, Request $req){
+
+        $sub = SubCategory::find($sub_id);
+        if(empty($sub)){
+            $req->session()->flash('error','Record not found');
+            return response([
+                'status'=> false,
+                'notFound' => true
+            ]);
+        }
+
+        $validator = Validator::make($req->all(), [
+            'name'=> 'required',
+            'category'=>'required',
+            'status'=>'required'
+        ]);
+
+        if($validator->passes()){
+
+            $category = new SubCategory();
+            $category->name = $req->name;
+           // $category->slug = $request->slug;
+           
+            $category->status = $req->status;
+            $category->category_id = $req->category;
+
+            $category->save();
+
+            $req->session()->flash('success','Sub Category updated successfully');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Added'
+            ]);
+        }else{
+            return response([
+                'status'=> false,
+                'errors'=> $validator->errors()
+            ]);
+        }
+    }
 }
 

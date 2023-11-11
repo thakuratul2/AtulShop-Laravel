@@ -53,9 +53,9 @@ Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->n
 Route::get('/sub-categories',[SubCategoryController::class,'SubCategory'])->name('subcat.view');
 Route::get('/sub-categories/create',[SubCategoryController::class,'create'])->name('subcat.create');
 Route::post('/sub-categories',[SubCategoryController::class,'store'])->name('subcat.show');
-Route::get('/sub-categories/{sub-category}/edit',[SubCategoryController::class,'edit'])->name('categories.edit');
-Route::put('/sub-categories/{sub-category}',[SubCategoryController::class,'update'])->name('categories.update');
-Route::delete('/sub-categories/{sub-category}',[SubCategoryController::class,'destroy'])->name('categories.delete');
+Route::get('/sub-categories/{subCategory}/edit',[SubCategoryController::class,'edit'])->name('subcat.edit');
+Route::put('/sub-categories/{subCategory}',[SubCategoryController::class,'update'])->name('subcat.update');
+Route::delete('/sub-categories/{subCategory}',[SubCategoryController::class,'destroy'])->name('subcat.delete');
 
 
 Route::post('/category-images',[ImagesController::class,'store'])->name('temp-images.create');
