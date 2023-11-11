@@ -85,10 +85,10 @@
 
       $("button[type=submit]").prop('disabled', false);
       if(response["status"] == true){
-        // window.location.href="{{route('admin.category')}}"
+        window.location.href="{{route('subcat.view')}}"
 
-        // $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
-        // .html("");
+        $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
 
        
       }else{

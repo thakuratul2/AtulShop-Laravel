@@ -11,9 +11,19 @@ use Validator;
 class SubCategoryController extends Controller
 {
     //
-    public function SubCategory(){
+    public function SubCategory(Request $req){
+        $subcat = SubCategory::select('sub_categories_table.*','categories.name as categoryName')->orderBy('sub_categories_table.sub_id','ASC')->leftJoin('categories','categories.cid','sub_categories_table.category_id');
 
-        return view('admin.sub_category.list');
+        if(!empty($req->get('keyword'))){
+            $subcat = $subcat->where('sub_categories_table.name', 'like', '%' .$req->get('keyword') . '%');
+            $subcat = $subcat->orWhere('categories.name', 'like', '%' .$req->get('keyword') . '%');
+
+        }
+        $subcat = $subcat->paginate(10);
+        
+        $data['cat'] = $subcat;
+
+        return view('admin.sub_category.list', $data);
     }
 
     public function create(){
