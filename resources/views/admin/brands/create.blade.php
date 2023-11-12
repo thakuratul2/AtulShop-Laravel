@@ -1,11 +1,11 @@
 @extends('admin.layout.app')
 
 @section('title')
-    {{'Add Sub-Category'}}
+    {{'Add Brands'}}
 @endsection
 
 @section('add-role')
-    <a href="{{route('subcat.view')}}"><button type="button" class="btn btn-gradient-primary btn-sm">Back</button></a>
+    <a href="{{route('brands.view')}}"><button type="button" class="btn btn-gradient-primary btn-sm">Back</button></a>
 @endsection
 @section('content')
 <section class="content">
@@ -15,24 +15,10 @@
     <div class="card">
       <div class="card-body">								
         <div class="row">
-                            <div class="col-md-12">
-            <div class="mb-3">
-              <label for="name">Category</label>
-              <select name="category" id="category" class="form-control">
-                <option value="">Select a Category</option>
-                <p></p>
-                @if ($categories->isNotEmpty()) 
-                    @foreach ($categories as $item)
-                    <option value="{{$item->cid}}">{{$item->name}}</option>
-
-                    @endforeach
-                @endif
-                                    </select>
-            </div>
-          </div>
+                            
           <div class="col-md-6">
             <div class="mb-3">
-              <label for="name">Name</label>
+              <label for="name">Brand Name</label>
               <input type="text" name="name" id="name" class="form-control" placeholder="Name">	
             <p></p>
             </div>
@@ -58,7 +44,6 @@
     </div>
     <div class="pb-5 pt-3">
       <button class="btn btn-primary">Create</button>
-      <a href="subcategory.html" class="btn btn-outline-dark ml-3">Cancel</a>
     </div>
     </form>
   </div>
@@ -77,7 +62,7 @@
 
   $.ajax({
 
-    url : '{{route("subcat.show")}}',
+    url : '{{route("brands.show")}}',
     type: 'post',
     data : element.serializeArray(),
     dataType: 'json',
@@ -85,7 +70,7 @@
 
       $("button[type=submit]").prop('disabled', false);
       if(response["status"] == true){
-        window.location.href="{{route('subcat.view')}}"
+        window.location.href="{{route('brands.view')}}"
 
         $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
         .html("");
