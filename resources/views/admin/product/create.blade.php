@@ -11,6 +11,7 @@
 @section('content')
 <section class="content">
     <!-- Default box -->
+    <form action="" method="POST" name="productForm" id="productForm">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -113,9 +114,14 @@
                         <div class="mb-3">
                             <label for="category">Category</label>
                             <select name="category" id="category" class="form-control">
-                                <option value="">Electronics</option>
-                                <option value="">Clothes</option>
-                                <option value="">Furniture</option>
+                                <option value="">Select a Category</option>
+                                @if ($categories->isNotEmpty())
+                                @foreach ($categories as $item)
+                                    <option value="{{$item->cid}}">{{$item->name}}</option>
+                                @endforeach
+                                    
+                                @endif
+                               
                             </select>
                         </div>
                         <div class="mb-3">
@@ -133,11 +139,13 @@
                         <h2 class="h4 mb-3">Product brand</h2>
                         <div class="mb-3">
                             <select name="status" id="status" class="form-control">
-                                <option value="">Apple</option>
-                                <option value="">Vivo</option>
-                                <option value="">HP</option>
-                                <option value="">Samsung</option>
-                                <option value="">DELL</option>
+                                <option value="">Select a Brand</option>
+                                @if ($brands->isNotEmpty())
+                                @foreach ($brands as $item)
+                                    <option value="{{$item->bid}}">{{$item->name}}</option>
+                                @endforeach
+                                    
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -161,10 +169,28 @@
             <a href="products.html" class="btn btn-outline-dark ml-3">Cancel</a>
         </div>
     </div>
+    </form>
     <!-- /.card -->
 </section>
 @endsection
 
 @section('customJs')
-    
+    <script>
+        $("#productForm").submit(function(event){
+            event.preventDefault();
+
+            $.ajax({
+                url:'',
+                type:'post',
+                data:{},
+                dataType: 'json',
+                success: function(response){
+
+                },
+                error: function(){
+                    console.log("Something Went Wrong");
+                }
+            });
+        });
+    </script>
 @endsection
