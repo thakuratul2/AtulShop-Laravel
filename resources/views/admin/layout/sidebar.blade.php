@@ -49,9 +49,9 @@ User
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">
-            <span class="menu-title">Forms</span>
-            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+          <a class="nav-link" href="{{route('product.view')}}">
+            <span class="menu-title">Products Management</span>
+            <i class="mdi mdi mdi-gift menu-icon"></i>
           </a>
         </li>
         <li class="nav-item">

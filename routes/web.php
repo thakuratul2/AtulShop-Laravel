@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DasboardController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Models\Brands;
@@ -70,6 +71,11 @@ Route::post('/brands',[BrandsController::class,'store'])->name('brands.show');
 Route::get('/brands/{brands}/edit',[BrandsController::class,'edit'])->name('brands.edit');
 Route::put('/brands/{brands}',[BrandsController::class,'update'])->name('brands.update');
 Route::delete('/brands/{brands}',[BrandsController::class,'destroy'])->name('brands.delete');
+
+
+//Products
+Route::get('/products',[ProductController::class,'Product'])->name('product.view');
+Route::get('/products/create',[ProductController::class,'create'])->name('product.create');
 
 
 

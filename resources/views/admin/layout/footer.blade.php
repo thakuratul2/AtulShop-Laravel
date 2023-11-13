@@ -11,12 +11,17 @@
 <script src="{{asset('admin-assets/js/dashboard.js')}}"></script>
 <script src="{{asset('admin-assets/js/todolist.js')}}"></script>
 <script src="{{asset('admin-assets/vendors/dropzone/min/dropzone.min.js')}}"></script>
-
+<script src="{{asset('admin-assets/vendors/js/summernote/summernote.min.js')}}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+    $(document).ready(function(){
+        $(".summernote").summernote({
+            height:250
+        });
     });
 </script>
 @yield('customJs')
