@@ -192,5 +192,21 @@
                 }
             });
         });
+
+        $("#sub_category").change(function(){
+            var category_id = $(this).val();
+            $.ajax({
+                url:'{{ route("productsub.view") }}',
+                type:'get',
+                data: {category_id:category_id},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                },
+                error: function(){
+                    console.log("Something Went Wrong");
+                }
+            });
+        })
     </script>
 @endsection

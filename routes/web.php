@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DasboardController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductSubCategory;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Models\Brands;
@@ -76,6 +77,11 @@ Route::delete('/brands/{brands}',[BrandsController::class,'destroy'])->name('bra
 //Products
 Route::get('/products',[ProductController::class,'Product'])->name('product.view');
 Route::get('/products/create',[ProductController::class,'create'])->name('product.create');
+
+
+
+//SubCategory
+Route::get('/product-subcategories',[ProductSubCategory::class,'SubCategory'])->name('productsub.view');
 
 
 
