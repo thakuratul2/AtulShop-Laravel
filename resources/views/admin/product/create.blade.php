@@ -194,6 +194,7 @@
         });
 
         $("#sub_category").change(function(){
+            
             var category_id = $(this).val();
             $.ajax({
                 url:'{{ route("productsub.view") }}',
