@@ -127,9 +127,8 @@
                         <div class="mb-3">
                             <label for="category">Sub category</label>
                             <select name="sub_category" id="sub_category" class="form-control">
-                                <option value="">Mobile</option>
-                                <option value="">Home Theater</option>
-                                <option value="">Headphones</option>
+                                <option value="">Select a SubCategory</option>
+
                             </select>
                         </div>
                     </div>
@@ -178,11 +177,11 @@
     <script>
         $("#productForm").submit(function(event){
             event.preventDefault();
-
+          var formArray = $(this).serializeArray();
             $.ajax({
-                url:'',
+                url:'{{route ("products.store")}}',
                 type:'post',
-                data:{},
+                data: formArray,
                 dataType: 'json',
                 success: function(response){
 
@@ -193,8 +192,7 @@
             });
         });
 
-        $("#sub_category").change(function(){
-            
+        $("#category").change(function(){
             var category_id = $(this).val();
             $.ajax({
                 url:'{{ route("productsub.view") }}',
@@ -202,12 +200,17 @@
                 data: {category_id:category_id},
                 dataType: 'json',
                 success: function(response){
-                    console.log(response);
+                    //console.log(response);
+                    $("#sub_category").find("option").not(":first").remove();
+                    $.each(response['subCategories'], function(key, item){
+
+                        $("#sub_category").append(`<option ='${item.id}'>${item.name}</option`)
+                    });
                 },
                 error: function(){
                     console.log("Something Went Wrong");
                 }
             });
-        })
+        });
     </script>
 @endsection

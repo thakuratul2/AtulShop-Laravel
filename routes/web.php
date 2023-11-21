@@ -77,11 +77,11 @@ Route::delete('/brands/{brands}',[BrandsController::class,'destroy'])->name('bra
 //Products
 Route::get('/products',[ProductController::class,'Product'])->name('product.view');
 Route::get('/products/create',[ProductController::class,'create'])->name('product.create');
-
+Route::post('products',[ProductController::class,'store'])->name('products.store');
 
 
 //SubCategory
-Route::get('/product-subcategories',[ProductSubCategory::class,'SubCategory'])->name('productsub.view');
+Route::get('/product-subcategories',[ProductSubCategory::class,'ProductSubCategory'])->name('productsub.view');
 
 
 
