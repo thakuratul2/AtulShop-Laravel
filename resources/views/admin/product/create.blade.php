@@ -84,7 +84,8 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox" id="track_qty" name="track_qty" checked>
+                                        <input type="hidden" name="track_qty" value="No">
+                                        <input class="custom-control-input" type="checkbox" id="track_qty" value="Yes" name="track_qty" checked>
                                         <label for="track_qty" class="custom-control-label">Track Quantity</label>
                                     </div>
                                 </div>
@@ -153,9 +154,9 @@
                     <div class="card-body">	
                         <h2 class="h4 mb-3">Featured product</h2>
                         <div class="mb-3">
-                            <select name="status" id="status" class="form-control">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>                                                
+                            <select name="is_featured" id="is_featured" class="form-control">
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>                                                
                             </select>
                         </div>
                     </div>
@@ -164,8 +165,7 @@
         </div>
         
         <div class="pb-5 pt-3">
-            <button class="btn btn-primary">Create</button>
-            <a href="products.html" class="btn btn-outline-dark ml-3">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </div>
     </form>
