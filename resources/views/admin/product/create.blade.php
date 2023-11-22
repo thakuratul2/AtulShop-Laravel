@@ -22,12 +22,15 @@
                                 <div class="mb-3">
                                     <label for="title">Title</label>
                                     <input type="text" name="title" id="title" class="form-control" placeholder="Title">	
+                                <p class="error"></p>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label for="description">Description</label>
                                     <textarea name="description" id="description" cols="30" rows="10" class="summernote" placeholder="Description"></textarea>
+                                    <p class="error"></p>
+
                                 </div>
                             </div>                                            
                         </div>
@@ -39,6 +42,8 @@
                         <div id="image" class="dropzone dz-clickable">
                             <div class="dz-message needsclick">    
                                 <br>Drop files here or click to upload.<br><br>                                            
+                                
+
                             </div>
                         </div>
                     </div>	                                                                      
@@ -51,6 +56,8 @@
                                 <div class="mb-3">
                                     <label for="price">Price</label>
                                     <input type="text" name="price" id="price" class="form-control" placeholder="Price">	
+                                    <p class="error"></p>
+
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -59,7 +66,8 @@
                                     <input type="text" name="compare_price" id="compare_price" class="form-control" placeholder="Compare Price">
                                     <p class="text-muted mt-3">
                                         To show a reduced price, move the product’s original price into Compare at price. Enter a lower value into Price.
-                                    </p>	
+                                    </p>
+                                   
                                 </div>
                             </div>                                            
                         </div>
@@ -73,6 +81,8 @@
                                 <div class="mb-3">
                                     <label for="sku">SKU (Stock Keeping Unit)</label>
                                     <input type="text" name="sku" id="sku" class="form-control" placeholder="sku">	
+                                    <p class="error"></p>
+
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -90,8 +100,10 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    
-                                    <input type="number" min="0" name="qty" id="qty" class="form-control" placeholder="Qty">	
+
+                                    <input type="number" min="0" name="qty" id="qty" class="form-control" placeholder="Qty">
+                                    <p class="error"></p>
+	
                                 </div>
                             </div>                                         
                         </div>
@@ -125,6 +137,8 @@
                                 @endif
                                
                             </select>
+                            <p class="error"></p>
+
                         </div>
                         <div class="mb-3">
                             <label for="category">Sub category</label>
@@ -185,7 +199,33 @@
                 data: formArray,
                 dataType: 'json',
                 success: function(response){
+                if(response['status'] == true){
 
+                }else{
+                    var errors = response['errors'];
+
+                    // if(errors['title']){
+                    //     $("#title").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .addClass('invalid-feedback')
+                    //     .html(errors['title']);
+                    // }else{
+                    //     $("#title").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .addClass('invalid-feedback')
+                    //     .html("");
+                    // }
+
+                    $('.error').removeClass('invalid-feedback').html('');
+                    $('input[type="text"], select').removeClass('is-invalid');
+
+                    $.each(errors, function(key, value){
+                        $(`#${key}`).addClass('is-invalid')
+                        .siblings('p')
+                        .addClass('invalid-feedback')
+                        .html(value);
+                    })
+                }
                 },
                 error: function(){
                     console.log("Something Went Wrong");
