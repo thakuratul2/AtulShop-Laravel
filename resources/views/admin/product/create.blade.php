@@ -90,6 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
+                                    
                                     <input type="number" min="0" name="qty" id="qty" class="form-control" placeholder="Qty">	
                                 </div>
                             </div>                                         
