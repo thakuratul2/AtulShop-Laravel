@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function store(Request $req){
         $rules = [
-            'title' =>'required',
+            'title' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
             'sku' => 'required',
@@ -38,7 +38,7 @@ class ProductController extends Controller
         ];
 
         if(!empty($req->track_qty) && $req->track_qty == 'Yes'){
-            
+
             $rules['qty'] = 'required|numeric';
         }
 
