@@ -38,6 +38,7 @@ class ProductController extends Controller
         ];
 
         if(!empty($req->track_qty) && $req->track_qty == 'Yes'){
+            
             $rules['qty'] = 'required|numeric';
         }
 
