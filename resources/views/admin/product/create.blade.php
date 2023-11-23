@@ -217,6 +217,7 @@
                     // }
 
                     $('.error').removeClass('invalid-feedback').html('');
+                    
                     $('input[type="text"], select').removeClass('is-invalid');
 
                     $.each(errors, function(key, value){
