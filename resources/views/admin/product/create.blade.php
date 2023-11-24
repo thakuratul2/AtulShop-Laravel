@@ -153,7 +153,7 @@
                     <div class="card-body">	
                         <h2 class="h4 mb-3">Product brand</h2>
                         <div class="mb-3">
-                            <select name="status" id="status" class="form-control">
+                            <select name="brand_id" id="brand_id" class="form-control">
                                 <option value="">Select a Brand</option>
                                 @if ($brands->isNotEmpty())
                                 @foreach ($brands as $item)
@@ -193,12 +193,15 @@
         $("#productForm").submit(function(event){
             event.preventDefault();
           var formArray = $(this).serializeArray();
+          $("button[type='submit']").prop('disables',true);
             $.ajax({
                 url:'{{route ("products.store")}}',
                 type:'post',
                 data: formArray,
                 dataType: 'json',
                 success: function(response){
+                    $("button[type='submit']").prop('disables',false);
+
                 if(response['status'] == true){
 
                 }else{
@@ -218,7 +221,7 @@
 
                     $('.error').removeClass('invalid-feedback').html('');
                     
-                    $('input[type="text"], select').removeClass('is-invalid');
+                    $('input[type="text"], select','input[type="number"]').removeClass('is-invalid');
 
                     $.each(errors, function(key, value){
                         $(`#${key}`).addClass('is-invalid')
@@ -246,7 +249,7 @@
                     $("#sub_category").find("option").not(":first").remove();
                     $.each(response['subCategories'], function(key, item){
 
-                        $("#sub_category").append(`<option ='${item.id}'>${item.name}</option`)
+                        $("#sub_category").append(`<option value='${item.sub_id}'>${item.name}</option`)
                     });
                 },
                 error: function(){

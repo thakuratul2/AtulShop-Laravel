@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brands;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -29,9 +30,9 @@ class ProductController extends Controller
     public function store(Request $req){
         $rules = [
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'required|unique:product',
             'price' => 'required|numeric',
-            'sku' => 'required',
+            'sku' => 'required|unique:product',
             'track_qty' => 'required|in:Yes,No',
             'category' => 'required|numeric',
             'is_featured' => 'required|in:Yes,No'
@@ -45,6 +46,30 @@ class ProductController extends Controller
        $valid =  Validator::make($req->all(), $rules);
 
        if($valid->passes()){
+
+        $product = new Product();
+        $product->title = $req->title;
+        $product->description = $req->description;
+        $product->price = $req->price;
+        $product->compare_price = $req->compare_price;
+        $product->category_id = $req->category;
+        $product->sub_category_id = $req->sub_category;
+        $product->brand_id = $req->brand_id;
+        $product->is_featured = $req->is_featured;
+        $product->sku = $req->sku;
+        $product->barcode = $req->barcode;
+        $product->track_qty = $req->track_qty;
+        $product->qty = $req->qty;
+        $product->status = $req->status;
+
+        $product->save();
+        
+        $req->session()->flash('success','Product Added successfully');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Added'
+        ]);
 
        }else{
         return response()->json([
