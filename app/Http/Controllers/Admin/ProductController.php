@@ -57,6 +57,7 @@ class ProductController extends Controller
         $product->brand_id = $req->brand_id;
         $product->is_featured = $req->is_featured;
         $product->sku = $req->sku;
+        
         $product->barcode = $req->barcode;
         $product->track_qty = $req->track_qty;
         $product->qty = $req->qty;
