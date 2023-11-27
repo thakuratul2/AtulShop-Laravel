@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\TempImages;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ImagesController extends Controller
 {
@@ -25,6 +26,8 @@ class ImagesController extends Controller
 
             $image->move(public_path().'/upload',$newName);
 
+            $sourcePath = public_path().'/upload'.$newName;
+            $image= Image::make();
             return response()->json([
                 'status'=> true,
                 'image_id' => $tempImage->tid,
