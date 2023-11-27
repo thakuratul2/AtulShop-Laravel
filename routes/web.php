@@ -8,8 +8,6 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductSubCategory;
 use App\Http\Controllers\Admin\SubCategoryController;
-use App\Http\Controllers\Admin\UserManagementController;
-use App\Models\Brands;
 use Illuminate\Support\Facades\Route;
 
 /*
