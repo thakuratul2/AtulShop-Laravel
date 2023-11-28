@@ -12,9 +12,18 @@ use Validator;
 class ProductController extends Controller
 {
     //
-    public function Product(){
+    public function Product(Request $req){
 
-        return view('admin.product.list');
+
+        $product = Product::orderBy('pid','ASC');
+        
+        if($req->get('keyword')!=""){
+            $product = $product->where('title','like','%'.$req->keyword.'%');
+        }
+
+        $product = $product->paginate(10);
+        $data['product'] = $product;
+        return view('admin.product.list',$data);
     }
 
     public function create(){
