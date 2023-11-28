@@ -9,7 +9,6 @@
 @endsection
 @section('content')
     
-
 @endsection 
   @section('customJs')
 
