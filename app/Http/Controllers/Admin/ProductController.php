@@ -88,4 +88,12 @@ class ProductController extends Controller
         ]);
        }
     }
+    public function edit(Request $req, $pid){
+        $product = Product::find($pid);
+        if(empty($product)){
+            return redirect()->route('product.view');
+        }
+        $data['product'] = $product;
+        return view('admin.product.edit',$data);
+    }
 }

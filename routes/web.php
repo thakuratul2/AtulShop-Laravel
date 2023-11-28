@@ -76,6 +76,7 @@ Route::delete('/brands/{brands}',[BrandsController::class,'destroy'])->name('bra
 Route::get('/products',[ProductController::class,'Product'])->name('product.view');
 Route::get('/products/create',[ProductController::class,'create'])->name('product.create');
 Route::post('products',[ProductController::class,'store'])->name('products.store');
+Route::get('/producst/{products}/edit',[ProductController::class,'edit'])->name('product.edit');
 
 
 //SubCategory
