@@ -11,7 +11,7 @@
 @section('content')
 <section class="content">
     <!-- Default box -->
-    <form action="" method="POST" name="productForm" id="productForm">
+    <form action="" method="POST" name="productForm" id="productForm" enctype="multipart/form-data">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
