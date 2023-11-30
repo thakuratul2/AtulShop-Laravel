@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brands;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -90,10 +91,21 @@ class ProductController extends Controller
     }
     public function edit(Request $req, $pid){
         $product = Product::find($pid);
+
+        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
+
+        
+        $data = [];
+
         if(empty($product)){
             return redirect()->route('product.view');
         }
         $data['product'] = $product;
+        $categories = Category::orderBy('name','ASC')->get();
+        $brands = Brands::orderBy('name','ASC')->get();
+        $data['categories'] = $categories;
+        $data['brands'] = $brands;
+        $data['subCat'] = $subCategories;
         return view('admin.product.edit',$data);
     }
 }
