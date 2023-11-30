@@ -108,4 +108,8 @@ class ProductController extends Controller
         $data['subCat'] = $subCategories;
         return view('admin.product.edit',$data);
     }
+
+    public function update($pid, Request $req){
+
+    }
 }
