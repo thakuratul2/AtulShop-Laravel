@@ -111,5 +111,56 @@ class ProductController extends Controller
 
     public function update($pid, Request $req){
 
+        $product = Product::find($pid);
+        $rules = [
+            'title' => 'required',
+            'description' => 'required|unique:product,description,'.$product->pid.',pid',
+            'price' => 'required|numeric',
+            'sku' => 'required|unique:product,sku,'.$product->pid.',pid',
+            'track_qty' => 'required|in:Yes,No',
+            'category' => 'required|numeric',
+            'is_featured' => 'required|in:Yes,No'
+        ];
+
+        if(!empty($req->track_qty) && $req->track_qty == 'Yes'){
+
+            $rules['qty'] = 'required|numeric';
+        }
+
+       $valid =  Validator::make($req->all(), $rules);
+
+       if($valid->passes()){
+
+
+        $product->title = $req->title;
+        $product->description = $req->description;
+        $product->price = $req->price;
+        $product->compare_price = $req->compare_price;
+        $product->category_id = $req->category;
+        $product->sub_category_id = $req->sub_category;
+        $product->brand_id = $req->brand_id;
+        $product->is_featured = $req->is_featured;
+        $product->sku = $req->sku;
+        
+        $product->barcode = $req->barcode;
+        $product->track_qty = $req->track_qty;
+        $product->qty = $req->qty;
+        $product->status = $req->status;
+
+        $product->save();
+        
+        $req->session()->flash('success','Product Updated successfully');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Updated'
+        ]);
+
+       }else{
+        return response()->json([
+            'status' => false,
+            'errors' => $valid->errors()
+        ]);
+       }
     }
 }

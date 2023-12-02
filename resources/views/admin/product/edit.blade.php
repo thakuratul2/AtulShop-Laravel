@@ -188,20 +188,39 @@
 @endsection
 
 @section('customJs')
-    {{-- <script>
+    <script>
         $("#productForm").submit(function(event){
             event.preventDefault();
           var formArray = $(this).serializeArray();
           $("button[type='submit']").prop('disables',true);
             $.ajax({
-                url:'{{route ("products.store")}}',
-                type:'post',
+                url:'{{route ("product.update", $product->pid)}}',
+                type:'put',
                 data: formArray,
                 dataType: 'json',
                 success: function(response){
                     $("button[type='submit']").prop('disables',false);
 
                 if(response['status'] == true){
+                    window.location.href="{{route('product.view')}}"
+
+        $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+
+       
+      }else{
+        var errors = response['errors'];
+      if(errors['name']){
+        $("#name").addClass('is-invalid')
+        .siblings('p')
+        .addClass('invalid-feedback')
+        .html(errors['name']);
+      }else{
+        
+        $("#name").removeClass('is-invalid').siblings('p').removeClass('invalid-feedback')
+        .html("");
+    
+      }
 
                 }else{
                     var errors = response['errors'];
@@ -236,26 +255,26 @@
             });
         });
 
-        $("#category").change(function(){
-            var category_id = $(this).val();
-            $.ajax({
-                url:'{{ route("productsub.view") }}',
-                type:'get',
-                data: {category_id:category_id},
-                dataType: 'json',
-                success: function(response){
-                    //console.log(response);
-                    $("#sub_category").find("option").not(":first").remove();
-                    $.each(response['subCategories'], function(key, item){
+        // $("#category").change(function(){
+        //     var category_id = $(this).val();
+        //     $.ajax({
+        //         url:'{{ route("productsub.view") }}',
+        //         type:'get',
+        //         data: {category_id:category_id},
+        //         dataType: 'json',
+        //         success: function(response){
+        //             //console.log(response);
+        //             $("#sub_category").find("option").not(":first").remove();
+        //             $.each(response['subCategories'], function(key, item){
 
-                        $("#sub_category").append(`<option value='${item.sub_id}'>${item.name}</option`)
-                    });
-                },
-                error: function(){
-                    console.log("Something Went Wrong");
-                }
-            });
-        });
+        //                 $("#sub_category").append(`<option value='${item.sub_id}'>${item.name}</option`)
+        //             });
+        //         },
+        //         error: function(){
+        //             console.log("Something Went Wrong");
+        //         }
+        //     });
+        // });
        
-    </script> --}}
+    </script>
 @endsection
