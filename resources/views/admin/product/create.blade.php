@@ -192,6 +192,7 @@
                     $("button[type='submit']").prop('disables',false);
 
                 if(response['status'] == true){
+                    window.location.href="{{route('product.view')}}"
 
                 }else{
                     var errors = response['errors'];

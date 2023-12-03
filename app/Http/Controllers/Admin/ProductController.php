@@ -97,9 +97,9 @@ class ProductController extends Controller
         
         $data = [];
 
-        if(empty($product)){
-            return redirect()->route('product.view');
-        }
+        // if(empty($product)){
+        //     return redirect()->route('product.view');
+        // }
         $data['product'] = $product;
         $categories = Category::orderBy('name','ASC')->get();
         $brands = Brands::orderBy('name','ASC')->get();
