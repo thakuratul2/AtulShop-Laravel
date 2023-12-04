@@ -235,6 +235,7 @@
                 data: {category_id:category_id},
                 dataType: 'json',
                 success: function(response){
+                    
                     //console.log(response);
                     $("#sub_category").find("option").not(":first").remove();
                     $.each(response['subCategories'], function(key, item){
