@@ -234,6 +234,7 @@
                 type:'get',
                 data: {category_id:category_id},
                 dataType: 'json',
+                
                 success: function(response){
                     
                     //console.log(response);
